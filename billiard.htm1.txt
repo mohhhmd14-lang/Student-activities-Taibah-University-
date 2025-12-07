@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>بطولة البلياردو</title>
+<style>
+body { font-family: Arial; background: linear-gradient(to bottom, #a0c4ff, #0077b6); color: #fff; text-align: center; padding: 20px; }
+input { margin: 10px; padding: 10px; width: 200px; }
+button { padding: 10px 20px; cursor: pointer; }
+</style>
+</head>
+<body>
+<h1>التسجيل في بطولة البلياردو 🎱</h1>
+<input id="pname" placeholder="الاسم">
+<input id="pid" placeholder="الرقم الجامعي">
+<button onclick="register()">تسجيل اللاعب</button>
+<p id="msg"></p>
+
+<h2>قوانين البطولة</h2>
+<ul>
+<li>نظام خروج المغلوب (Single Elimination)</li>
+<li>تطبيق قانون الأمريكي للبلياردو</li>
+<li>لا توجد رسوم مشاركة</li>
+<li>لا توجد لوحة عرض</li>
+</ul>
+
+<h2>تقسيمة البطولة (16 لاعب)</h2>
+<p>دور الـ16 — 8 مباريات</p>
+<p>ربع النهائي — 4 مباريات</p>
+<p>نصف النهائي — 2 مباراة</p>
+<p>النهائي — مباراة واحدة (One vs One)</p>
+
+<a href="tournament.html">العودة للرئيسية</a>
+
+<script>
+function register() {
+  const name = document.getElementById('pname').value.trim();
+  const id = document.getElementById('pid').value.trim();
+  const msg = document.getElementById('msg');
+  if(!name || !id){ msg.textContent="يرجى إدخال الاسم والرقم الجامعي."; return; }
+  let players = JSON.parse(localStorage.getItem('players16') || '[]');
+  if(players.length >= 16){ msg.textContent="قائمة التسجيل ممتلئة (16 لاعب)."; return; }
+  players.push({name,id});
+  localStorage.setItem('players16', JSON.stringify(players));
+  msg.textContent="تم تسجيل اللاعب. إجمالي المسجلين: " + players.length;
+  document.getElementById('pname').value='';
+  document.getElementById('pid').value='';
+}
+</script>
+</body>
+</html>

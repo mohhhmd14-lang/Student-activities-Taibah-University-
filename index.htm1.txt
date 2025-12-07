@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>تسجيل الدخول</title>
+<style>
+body { 
+    font-family: Arial; 
+    background: linear-gradient(to bottom, #a0c4ff, #0077b6); 
+    color: #fff; 
+    text-align: center; 
+    padding-top: 50px; 
+}
+input { 
+    margin: 10px; 
+    padding: 10px; 
+    width: 200px; 
+}
+button { 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    background-color: #023e8a; 
+    color: #fff; 
+    border: none; 
+    border-radius: 5px;
+}
+button:hover {
+    background-color: #03045e;
+}
+</style>
+</head>
+<body>
+<h1>مرحباً بكم في موقع البطولة</h1>
+<input id="name" placeholder="الاسم"><br>
+<input id="id" placeholder="الرقم الجامعي"><br>
+<button onclick="login()">دخول</button>
+
+<script>
+function login() {
+    const name = document.getElementById("name").value.trim();
+    const id = document.getElementById("id").value.trim();
+    
+    if (!name || !id) {
+        alert("يرجى إدخال الاسم والرقم الجامعي");
+        return;
+    }
+    
+    // حفظ البيانات في LocalStorage
+    localStorage.setItem("playerName", name);
+    localStorage.setItem("playerID", id);
+    
+    alert(`مرحباً ${name}! تم تسجيل الدخول بنجاح.`);
+    
+    // التوجيه إلى الصفحة الرئيسية
+    window.location.href = "tournament.html";
+}
+</script>
+</body>
+</html>
